@@ -100,6 +100,35 @@ func TestFlexibleSeasonalUsesHistoricalYears(t *testing.T) {
 		t.Fatalf("unexpected seasonal reason: %+v", item.Reasons)
 	}
 }
+func TestFlexibleSeasonalWindowIsBestPerPlaceWithin30Days(t *testing.T) {
+	s := testServer(t)
+	req := validRequest()
+	resp := s.makeResponse(req, nil, true)
+	clockDay := s.clock().In(s.loc)
+	horizonStart := time.Date(clockDay.Year(), clockDay.Month(), clockDay.Day()+1, 0, 0, 0, 0, s.loc)
+	horizonEnd := time.Date(clockDay.Year(), clockDay.Month(), clockDay.Day()+maxHorizonDays, 0, 0, 0, 0, s.loc)
+	for _, item := range resp.Groups[0].Items {
+		start, err := time.ParseInLocation("2006-01-02", item.StartDate, s.loc)
+		if err != nil {
+			t.Fatalf("place %s returned invalid start date %q: %v", item.PlaceID, item.StartDate, err)
+		}
+		end, err := time.ParseInLocation("2006-01-02", item.EndDate, s.loc)
+		if err != nil {
+			t.Fatalf("place %s returned invalid end date %q: %v", item.PlaceID, item.EndDate, err)
+		}
+		if start.Before(horizonStart) || end.After(horizonEnd) || daysBetween(start, end) != req.TripDays {
+			t.Fatalf("place %s returned window outside 30-day trip policy: %s..%s", item.PlaceID, item.StartDate, item.EndDate)
+		}
+		place := item.Place
+		lastStart := horizonEnd.AddDate(0, 0, -(req.TripDays - 1))
+		for candidate := horizonStart; !candidate.After(lastStart); candidate = candidate.AddDate(0, 0, 1) {
+			candidateItem := s.seasonalItemForPeriod(place, req, dateOnly(candidate), dateOnly(candidate.AddDate(0, 0, req.TripDays-1)))
+			if betterSeasonalItem(candidateItem, item) {
+				t.Fatalf("place %s did not return its best 30-day window: got %s..%s, better candidate %s..%s", item.PlaceID, item.StartDate, item.EndDate, candidateItem.StartDate, candidateItem.EndDate)
+			}
+		}
+	}
+}
 func TestSeasonalOptionalDailyRequirementIsIncomplete(t *testing.T) {
 	s := testServer(t)
 	req := validRequest()
