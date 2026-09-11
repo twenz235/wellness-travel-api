@@ -131,7 +131,7 @@ func TestFlexibleSeasonalWindowIsBestPerPlaceWithin30Days(t *testing.T) {
 }
 func TestScoringProfilesSeparateSystemAndUserPreferences(t *testing.T) {
 	s := testServer(t)
-	systemReq := RecommendationRequest{TripDays: 2, Period: "day", ScoringProfile: "system", Requirements: map[string]any{"placeType": "national_park"}}
+	systemReq := RecommendationRequest{TripDays: 2, Period: "day", ScoringProfile: "system", Preferences: validRequest().Preferences, Requirements: map[string]any{"placeType": "national_park"}}
 	dates, flex, err := s.validateRequest(&systemReq)
 	if err != nil || !flex || dates != nil {
 		t.Fatalf("system profile validation dates=%v flex=%v err=%v", dates, flex, err)
