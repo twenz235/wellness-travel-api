@@ -74,6 +74,17 @@ func TestProductionDatasetLoaded(t *testing.T) {
 		t.Fatalf("expected 120 monthly records, got %d", len(s.seasonal["park-01"]))
 	}
 }
+
+func TestEmbeddedDataFallbackMatchesServerlessPath(t *testing.T) {
+	places, err := loadPlaces(filepath.Join("/var/task", "data", "places.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(places) != 24 {
+		t.Fatalf("embedded catalog places=%d, want 24", len(places))
+	}
+}
+
 func TestFlexibleSeasonalUsesHistoricalYears(t *testing.T) {
 	s := testServer(t)
 	req := validRequest()

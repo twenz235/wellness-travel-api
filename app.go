@@ -3,6 +3,7 @@ package wellnesstravel
 import (
 	"context"
 	"crypto/sha256"
+	"embed"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -28,6 +29,14 @@ const (
 	timezoneName   = "Asia/Bangkok"
 	coverageMin    = 0.8
 )
+
+// Vercel's Go runtime compiles the function into an isolated /var/task
+// directory and does not copy arbitrary data files next to the executable.
+// Embed the deterministic MVP snapshots so the serverless handler has the
+// same data source as the local binary.
+//
+//go:embed data/*.json
+var dataFS embed.FS
 
 type Place struct {
 	ID               string  `json:"id"`
@@ -338,8 +347,28 @@ func newRouter(s *server) *gin.Engine {
 	return router
 }
 
+func readData(path string) ([]byte, error) {
+	b, fileErr := os.ReadFile(path)
+	if fileErr == nil {
+		return b, nil
+	}
+
+	// Keep callers using normal filesystem paths while resolving the same
+	// relative data path from the embedded FS in serverless deployments.
+	rel := filepath.ToSlash(path)
+	if i := strings.Index(rel, "data/"); i >= 0 {
+		rel = rel[i:]
+	} else {
+		rel = strings.TrimPrefix(rel, "./")
+	}
+	if b, embedErr := dataFS.ReadFile(rel); embedErr == nil {
+		return b, nil
+	}
+	return nil, fileErr
+}
+
 func loadPlaces(path string) ([]Place, error) {
-	b, e := os.ReadFile(path)
+	b, e := readData(path)
 	if e != nil {
 		return nil, e
 	}
@@ -368,7 +397,7 @@ func loadPlaces(path string) ([]Place, error) {
 	return out, nil
 }
 func loadForecast(path string, places []Place, air bool, loc *time.Location) (map[string][]observation, Source, error) {
-	b, e := os.ReadFile(path)
+	b, e := readData(path)
 	if e != nil {
 		return nil, Source{}, e
 	}
@@ -419,7 +448,7 @@ func loadForecast(path string, places []Place, air bool, loc *time.Location) (ma
 	return out, Source{ID: id, Provider: "Open-Meteo", Model: model, RetrievedAt: retrieved.Format(time.RFC3339), ValidFrom: first.UTC().Format(time.RFC3339), ValidTo: last.UTC().Format(time.RFC3339), Resolution: "1 hour", SourceURL: url}, nil
 }
 func loadSeasonal(path string) (map[string][]seasonalRecord, error) {
-	b, e := os.ReadFile(path)
+	b, e := readData(path)
 	if e != nil {
 		return nil, e
 	}
@@ -436,7 +465,7 @@ func loadSeasonal(path string) (map[string][]seasonalRecord, error) {
 	return out, nil
 }
 func loadSeas5(path string) (map[string][]seas5Point, error) {
-	b, e := os.ReadFile(path)
+	b, e := readData(path)
 	if e != nil {
 		return nil, e
 	}
