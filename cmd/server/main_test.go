@@ -1,4 +1,4 @@
-package wellnesstravel
+package main
 
 import (
 	"bytes"
@@ -18,23 +18,23 @@ func testServer(t *testing.T) *server {
 	if err != nil {
 		t.Fatal(err)
 	}
-	places, err := loadPlaces(filepath.Join("data", "places.json"))
+	places, err := loadPlaces(filepath.Join("..", "..", "data", "places.json"))
 	if err != nil {
 		t.Fatal(err)
 	}
-	weather, ws, err := loadForecast(filepath.Join("data", "forecast.json"), places, false, loc)
+	weather, ws, err := loadForecast(filepath.Join("..", "..", "data", "forecast.json"), places, false, loc)
 	if err != nil {
 		t.Fatal(err)
 	}
-	air, as, err := loadForecast(filepath.Join("data", "air-forecast.json"), places, true, loc)
+	air, as, err := loadForecast(filepath.Join("..", "..", "data", "air-forecast.json"), places, true, loc)
 	if err != nil {
 		t.Fatal(err)
 	}
-	seasonal, err := loadSeasonal(filepath.Join("data", "seasonal_month.json"))
+	seasonal, err := loadSeasonal(filepath.Join("..", "..", "data", "seasonal_month.json"))
 	if err != nil {
 		t.Fatal(err)
 	}
-	seas5, err := loadSeas5(filepath.Join("data", "seas5.json"))
+	seas5, err := loadSeas5(filepath.Join("..", "..", "data", "seas5.json"))
 	if err != nil {
 		t.Fatal(err)
 	}
