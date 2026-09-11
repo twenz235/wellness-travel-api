@@ -64,10 +64,11 @@ type RecommendationRequest struct {
 		StartDate string `json:"startDate"`
 		EndDate   string `json:"endDate"`
 	} `json:"dates"`
-	TripDays     int            `json:"tripDays"`
-	Period       string         `json:"period"`
-	Preferences  *Preferences   `json:"preferences"`
-	Requirements map[string]any `json:"requirements"`
+	TripDays       int            `json:"tripDays"`
+	Period         string         `json:"period"`
+	ScoringProfile string         `json:"scoringProfile"`
+	Preferences    *Preferences   `json:"preferences"`
+	Requirements   map[string]any `json:"requirements"`
 }
 type DetailRequest struct {
 	RecommendationRequest
@@ -612,7 +613,31 @@ func (s *server) recommendationDetail(w http.ResponseWriter, r *http.Request) {
 	writeError(w, http.StatusNotFound, "place_not_found")
 }
 
+func systemBaselinePreferences() *Preferences {
+	p := &Preferences{}
+	p.Temperature.MinC = 25
+	p.Temperature.MaxC = 30
+	p.Temperature.Weight = 1
+	p.Rain.Preference = "dry"
+	p.Rain.Weight = 1
+	p.Air.Weight = 1
+	return p
+}
+
 func (s *server) validateRequest(req *RecommendationRequest) ([]time.Time, bool, error) {
+	if req.ScoringProfile == "" {
+		return nil, false, errors.New("scoring_profile_required")
+	}
+	switch req.ScoringProfile {
+	case "system":
+		// System recommendations always use the declared baseline, even if a
+		// caller accidentally includes user preferences in the request.
+		req.Preferences = systemBaselinePreferences()
+	case "user":
+		// User recommendations validate the supplied profile below.
+	default:
+		return nil, false, errors.New("invalid_scoring_profile")
+	}
 	if req.Period != "all" && req.Period != "day" && req.Period != "night" {
 		return nil, false, errors.New("invalid_period")
 	}
@@ -723,7 +748,7 @@ func (s *server) response(req RecommendationRequest, dates []time.Time, flex boo
 	if flex {
 		warnings = append(warnings, "seasonal uses ERA5 2016-2025 and CAMS archived forecasts 2023-2025; it is a historical trend, not a daily forecast")
 	}
-	return RecommendationResponse{RequestID: fmt.Sprintf("local-%d", s.clock().UnixNano()), ScoringVersion: "v1", GeneratedAt: s.clock().UTC().Format(time.RFC3339), Timezone: timezoneName, Search: map[string]any{"kind": map[bool]string{true: "flexible", false: "vacation"}[flex], "startDate": start, "endDate": end, "tripDays": trip, "mode": map[bool]string{true: "seasonal", false: "forecast"}[flex], "selectedDates": dates}, Groups: groups, Warnings: warnings}
+	return RecommendationResponse{RequestID: fmt.Sprintf("local-%d", s.clock().UnixNano()), ScoringVersion: "v1", GeneratedAt: s.clock().UTC().Format(time.RFC3339), Timezone: timezoneName, Search: map[string]any{"kind": map[bool]string{true: "flexible", false: "vacation"}[flex], "startDate": start, "endDate": end, "tripDays": trip, "mode": map[bool]string{true: "seasonal", false: "forecast"}[flex], "scoringProfile": req.ScoringProfile, "selectedDates": dates}, Groups: groups, Warnings: warnings}
 }
 
 func (s *server) forecastItem(p Place, req RecommendationRequest, start, end time.Time) Item {

@@ -56,7 +56,7 @@ func validRequest() RecommendationRequest {
 	p.Temperature.MinC, p.Temperature.MaxC, p.Temperature.Weight = 20, 26, 2
 	p.Rain.Preference, p.Rain.Weight = "light", 1
 	p.Air.Weight = 3
-	return RecommendationRequest{TripDays: 2, Period: "all", Preferences: &p, Requirements: map[string]any{"placeType": "national_park"}}
+	return RecommendationRequest{TripDays: 2, Period: "all", ScoringProfile: "user", Preferences: &p, Requirements: map[string]any{"placeType": "national_park"}}
 }
 func explicitDates(req *RecommendationRequest, start, end string) {
 	req.Dates = &struct {
@@ -129,6 +129,30 @@ func TestFlexibleSeasonalWindowIsBestPerPlaceWithin30Days(t *testing.T) {
 		}
 	}
 }
+func TestScoringProfilesSeparateSystemAndUserPreferences(t *testing.T) {
+	s := testServer(t)
+	systemReq := RecommendationRequest{TripDays: 2, Period: "day", ScoringProfile: "system", Requirements: map[string]any{"placeType": "national_park"}}
+	dates, flex, err := s.validateRequest(&systemReq)
+	if err != nil || !flex || dates != nil {
+		t.Fatalf("system profile validation dates=%v flex=%v err=%v", dates, flex, err)
+	}
+	if systemReq.Preferences == nil || systemReq.Preferences.Temperature.MinC != 25 || systemReq.Preferences.Temperature.MaxC != 30 || systemReq.Preferences.Rain.Preference != "dry" || systemReq.Preferences.Temperature.Weight != 1 || systemReq.Preferences.Rain.Weight != 1 || systemReq.Preferences.Air.Weight != 1 {
+		t.Fatalf("system baseline was not applied: %+v", systemReq.Preferences)
+	}
+	response := s.makeResponse(systemReq, dates, flex)
+	if response.Search["scoringProfile"] != "system" {
+		t.Fatalf("response did not preserve system scoring profile: %+v", response.Search)
+	}
+	userReq := RecommendationRequest{TripDays: 2, Period: "day", ScoringProfile: "user", Requirements: map[string]any{"placeType": "national_park"}}
+	if _, _, err := s.validateRequest(&userReq); err == nil || err.Error() != "preferences_required" {
+		t.Fatalf("missing user preferences error=%v", err)
+	}
+	invalidReq := validRequest()
+	invalidReq.ScoringProfile = "unknown"
+	if _, _, err := s.validateRequest(&invalidReq); err == nil || err.Error() != "invalid_scoring_profile" {
+		t.Fatalf("invalid scoring profile error=%v", err)
+	}
+}
 func TestSeasonalOptionalDailyRequirementIsIncomplete(t *testing.T) {
 	s := testServer(t)
 	req := validRequest()
@@ -186,7 +210,7 @@ func TestForecastIncompleteAndRequirementFailure(t *testing.T) {
 func TestDetailHasDailyHourlySourcesAndOutlook(t *testing.T) {
 	s := testServer(t)
 	req := validRequest()
-	body := map[string]any{"dates": map[string]string{"startDate": "2026-09-12", "endDate": "2026-09-13"}, "tripDays": 2, "period": "all", "preferences": req.Preferences, "requirements": req.Requirements, "placeId": "park-01", "selectedStartDate": "2026-09-12", "selectedEndDate": "2026-09-13", "mode": "forecast"}
+	body := map[string]any{"dates": map[string]string{"startDate": "2026-09-12", "endDate": "2026-09-13"}, "tripDays": 2, "period": "all", "scoringProfile": "user", "preferences": req.Preferences, "requirements": req.Requirements, "placeId": "park-01", "selectedStartDate": "2026-09-12", "selectedEndDate": "2026-09-13", "mode": "forecast"}
 	raw, _ := json.Marshal(body)
 	r := httptest.NewRequest(http.MethodPost, "/v1/recommendations/detail", bytes.NewReader(raw))
 	w := httptest.NewRecorder()
@@ -310,7 +334,13 @@ func TestHTTPValidationErrors(t *testing.T) {
 	if badResponse.Code != http.StatusBadRequest || !bytes.Contains(badResponse.Body.Bytes(), []byte("malformed_json")) {
 		t.Fatalf("malformed request status=%d body=%s", badResponse.Code, badResponse.Body.String())
 	}
-	missing := httptest.NewRequest(http.MethodPost, "/v1/recommendations", bytes.NewBufferString(`{"tripDays":2,"period":"all","requirements":{"placeType":"national_park"}}`))
+	missingProfile := httptest.NewRequest(http.MethodPost, "/v1/recommendations", bytes.NewBufferString(`{"tripDays":2,"period":"all","requirements":{"placeType":"national_park"}}`))
+	missingProfileResponse := httptest.NewRecorder()
+	mux.ServeHTTP(missingProfileResponse, missingProfile)
+	if missingProfileResponse.Code != http.StatusUnprocessableEntity || !bytes.Contains(missingProfileResponse.Body.Bytes(), []byte("scoring_profile_required")) {
+		t.Fatalf("missing scoring profile status=%d body=%s", missingProfileResponse.Code, missingProfileResponse.Body.String())
+	}
+	missing := httptest.NewRequest(http.MethodPost, "/v1/recommendations", bytes.NewBufferString(`{"tripDays":2,"period":"all","scoringProfile":"user","requirements":{"placeType":"national_park"}}`))
 	missingResponse := httptest.NewRecorder()
 	mux.ServeHTTP(missingResponse, missing)
 	if missingResponse.Code != http.StatusUnprocessableEntity || !bytes.Contains(missingResponse.Body.Bytes(), []byte("preferences_required")) {
