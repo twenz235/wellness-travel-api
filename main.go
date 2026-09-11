@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"crypto/sha256"
+	"embed"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -19,9 +20,10 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-
-	datafiles "github.com/Wysakm/wellness-travel-api/data"
 )
+
+//go:embed data/*.json
+var dataFS embed.FS
 
 const (
 	maxHorizonDays = 30
@@ -354,7 +356,7 @@ func readData(path string) ([]byte, error) {
 	} else {
 		rel = strings.TrimPrefix(rel, "./")
 	}
-	if b, embedErr := datafiles.ReadFile(rel); embedErr == nil {
+	if b, embedErr := dataFS.ReadFile(rel); embedErr == nil {
 		return b, nil
 	}
 	return nil, fileErr

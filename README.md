@@ -4,12 +4,12 @@ Go API for Wellness Travel MVP1. The server owns validation, scoring, provenance
 
 ## Vercel
 
-This repository is configured with the Vercel **Go Framework Preset** (`vercel.json`). Vercel detects `go.mod` and runs `cmd/server/main.go`; the server listens on Vercel's `PORT` environment variable. Deploy from this directory with `vercel --prod`, then set `CORS_ORIGIN` to the web project's production origin. Keep `SUPABASE_SERVICE_ROLE_KEY` server-only. The public API keeps the same paths (`/healthz` and `/v1/*`).
+This repository is configured with the Vercel **Go Gin Framework Preset** (`vercel.json`). Vercel builds the root `main.go` Gin server and supplies its `PORT` environment variable. Deploy from this directory with `vercel --prod`, then set `CORS_ORIGIN` to the web project's production origin. Keep `SUPABASE_SERVICE_ROLE_KEY` server-only. The public API keeps the same paths (`/healthz` and `/v1/*`).
 
 ## Run
 
 ```bash
-go run ./cmd/server
+go run .
 curl http://localhost:8080/healthz
 ```
 
