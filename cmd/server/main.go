@@ -487,7 +487,10 @@ func fetchURL(ctx context.Context, client *http.Client, url string) ([]byte, err
 
 func withCORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", getenv("CORS_ORIGIN", "http://localhost:3000"))
+		if origin := corsAllowOrigin(r.Header.Get("Origin")); origin != "" {
+			w.Header().Set("Access-Control-Allow-Origin", origin)
+			w.Header().Add("Vary", "Origin")
+		}
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		w.Header().Set("Access-Control-Allow-Methods", "GET,POST,OPTIONS")
 		if r.Method == http.MethodOptions {
@@ -500,7 +503,10 @@ func withCORS(next http.Handler) http.Handler {
 
 func ginCORS() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", getenv("CORS_ORIGIN", "http://localhost:3000"))
+		if origin := corsAllowOrigin(c.GetHeader("Origin")); origin != "" {
+			c.Header("Access-Control-Allow-Origin", origin)
+			c.Header("Vary", "Origin")
+		}
 		c.Header("Access-Control-Allow-Headers", "Content-Type")
 		c.Header("Access-Control-Allow-Methods", "GET,POST,OPTIONS")
 		if c.Request.Method == http.MethodOptions {
@@ -509,6 +515,23 @@ func ginCORS() gin.HandlerFunc {
 		}
 		c.Next()
 	}
+}
+
+func corsAllowOrigin(origin string) string {
+	configured := getenv("CORS_ORIGIN", "http://localhost:3000,http://127.0.0.1:3000,http://localhost:13001,http://127.0.0.1:13001")
+	allowed := strings.Split(configured, ",")
+	if origin == "" {
+		if len(allowed) == 0 {
+			return ""
+		}
+		return strings.TrimSpace(allowed[0])
+	}
+	for _, candidate := range allowed {
+		if strings.TrimSpace(candidate) == origin {
+			return origin
+		}
+	}
+	return ""
 }
 
 func (s *server) health(w http.ResponseWriter, r *http.Request) {

@@ -263,11 +263,11 @@ func TestGinRouterAndCORS(t *testing.T) {
 		t.Fatalf("gin health route status=%d headers=%v body=%s", w.Code, w.Header(), w.Body.String())
 	}
 	preflight := httptest.NewRequest(http.MethodOptions, "/v1/recommendations", nil)
-	preflight.Header.Set("Origin", "http://localhost:3000")
+	preflight.Header.Set("Origin", "http://127.0.0.1:13001")
 	preflightResponse := httptest.NewRecorder()
 	router.ServeHTTP(preflightResponse, preflight)
-	if preflightResponse.Code != http.StatusNoContent {
-		t.Fatalf("gin preflight status=%d", preflightResponse.Code)
+	if preflightResponse.Code != http.StatusNoContent || preflightResponse.Header().Get("Access-Control-Allow-Origin") != "http://127.0.0.1:13001" {
+		t.Fatalf("gin preflight status=%d headers=%v", preflightResponse.Code, preflightResponse.Header())
 	}
 }
 
