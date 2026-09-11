@@ -246,6 +246,25 @@ func TestCacheAndCORS(t *testing.T) {
 		}
 	}
 }
+
+func TestGinRouterAndCORS(t *testing.T) {
+	s := testServer(t)
+	router := newRouter(s)
+	req := httptest.NewRequest(http.MethodGet, "/healthz", nil)
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK || w.Header().Get("Access-Control-Allow-Origin") == "" {
+		t.Fatalf("gin health route status=%d headers=%v body=%s", w.Code, w.Header(), w.Body.String())
+	}
+	preflight := httptest.NewRequest(http.MethodOptions, "/v1/recommendations", nil)
+	preflight.Header.Set("Origin", "http://localhost:3000")
+	preflightResponse := httptest.NewRecorder()
+	router.ServeHTTP(preflightResponse, preflight)
+	if preflightResponse.Code != http.StatusNoContent {
+		t.Fatalf("gin preflight status=%d", preflightResponse.Code)
+	}
+}
+
 func TestHTTPValidationErrors(t *testing.T) {
 	s := testServer(t)
 	mux := http.NewServeMux()

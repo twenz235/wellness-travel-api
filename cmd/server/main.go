@@ -17,6 +17,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 const (
@@ -276,15 +278,25 @@ func main() {
 		}
 		s.places, s.fromSupabase = remote, true
 	}
-	mux := http.NewServeMux()
-	mux.HandleFunc("/healthz", s.health)
-	mux.HandleFunc("/v1/capabilities", s.capabilities)
-	mux.HandleFunc("/v1/places", s.placesHandler)
-	mux.HandleFunc("/v1/recommendations", s.recommendations)
-	mux.HandleFunc("/v1/recommendations/detail", s.recommendationDetail)
 	addr := getenv("PORT", "8080")
 	log.Printf("wellness-travel-api listening on :%s (catalog=%s)", addr, map[bool]string{true: "supabase", false: "file"}[s.fromSupabase])
-	log.Fatal(http.ListenAndServe(":"+addr, withCORS(mux)))
+	gin.SetMode(gin.ReleaseMode)
+	log.Fatal(newRouter(s).Run(":" + addr))
+}
+
+// newRouter is shared by the local binary and Vercel's Go Framework Preset.
+// The domain handlers stay net/http-compatible so existing contract tests can
+// exercise them directly while Gin owns routing, recovery, and CORS in the
+// running application.
+func newRouter(s *server) *gin.Engine {
+	router := gin.New()
+	router.Use(gin.Recovery(), ginCORS())
+	router.GET("/healthz", gin.WrapF(s.health))
+	router.GET("/v1/capabilities", gin.WrapF(s.capabilities))
+	router.GET("/v1/places", gin.WrapF(s.placesHandler))
+	router.POST("/v1/recommendations", gin.WrapF(s.recommendations))
+	router.POST("/v1/recommendations/detail", gin.WrapF(s.recommendationDetail))
+	return router
 }
 
 func loadPlaces(path string) ([]Place, error) {
@@ -479,6 +491,20 @@ func withCORS(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
+
+func ginCORS() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Header("Access-Control-Allow-Origin", getenv("CORS_ORIGIN", "http://localhost:3000"))
+		c.Header("Access-Control-Allow-Headers", "Content-Type")
+		c.Header("Access-Control-Allow-Methods", "GET,POST,OPTIONS")
+		if c.Request.Method == http.MethodOptions {
+			c.AbortWithStatus(http.StatusNoContent)
+			return
+		}
+		c.Next()
+	}
+}
+
 func (s *server) health(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]any{"status": "ok", "version": apiVersion, "catalogSource": map[bool]string{true: "supabase", false: "file"}[s.fromSupabase], "forecastPlaces": len(s.forecastWeather), "seasonalPlaces": len(s.seasonal)})
 }
