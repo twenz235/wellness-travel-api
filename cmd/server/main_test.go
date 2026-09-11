@@ -239,6 +239,35 @@ func TestDetailHasDailyHourlySourcesAndOutlook(t *testing.T) {
 		t.Fatal("daily detail must expose the AQI-derived score")
 	}
 }
+func TestSeasonalDetailAcceptsCardWindowContext(t *testing.T) {
+	s := testServer(t)
+	req := validRequest()
+	body := map[string]any{"dates": nil, "tripDays": 2, "period": "day", "scoringProfile": "user", "preferences": req.Preferences, "requirements": req.Requirements, "placeId": "park-01", "selectedStartDate": "2026-09-12", "selectedEndDate": "2026-09-13", "mode": "seasonal"}
+	raw, _ := json.Marshal(body)
+	r := httptest.NewRequest(http.MethodPost, "/v1/recommendations/detail", bytes.NewReader(raw))
+	w := httptest.NewRecorder()
+	s.recommendationDetail(w, r)
+	if w.Code != http.StatusOK {
+		t.Fatalf("seasonal detail status=%d body=%s", w.Code, w.Body.String())
+	}
+	var resp RecommendationResponse
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatal(err)
+	}
+	var item *Item
+	for i := range resp.Groups[0].Items {
+		if resp.Groups[0].Items[i].PlaceID == "park-01" {
+			item = &resp.Groups[0].Items[i]
+			break
+		}
+	}
+	if item == nil || item.Details == nil || len(item.Details.SeasonalYears) == 0 {
+		t.Fatalf("seasonal detail missing years: %+v", item)
+	}
+	if resp.Search["mode"] != "seasonal" {
+		t.Fatalf("expected seasonal response mode, got %v", resp.Search["mode"])
+	}
+}
 func TestSEAS5OutlookUsesPlaceCoordinates(t *testing.T) {
 	s := testServer(t)
 	a := s.outlook("park-01", "2026-09-12")

@@ -582,10 +582,15 @@ func (s *server) recommendationDetail(w http.ResponseWriter, r *http.Request) {
 			writeError(w, http.StatusUnprocessableEntity, "selected_dates_must_be_both")
 			return
 		}
-		in.Dates = &struct {
-			StartDate string `json:"startDate"`
-			EndDate   string `json:"endDate"`
-		}{in.SelectedStartDate, in.SelectedEndDate}
+		// A Seasonal card carries its selected best window for display context,
+		// but that window must not switch the detail request into Forecast mode.
+		// Seasonal scoring still searches the server-owned 30-day window.
+		if in.Mode != "seasonal" {
+			in.Dates = &struct {
+				StartDate string `json:"startDate"`
+				EndDate   string `json:"endDate"`
+			}{in.SelectedStartDate, in.SelectedEndDate}
+		}
 	}
 	dates, flex, e := s.validateRequest(&in.RecommendationRequest)
 	if e != nil {
