@@ -88,6 +88,9 @@ func TestFlexibleSeasonalUsesHistoricalYears(t *testing.T) {
 	if item.Score == nil || len(item.SourceIDs) < 10 || item.Requirements[0].Status != "passed" {
 		t.Fatalf("seasonal item missing score/provenance/requirement: %+v", item)
 	}
+	if item.Metrics == nil || item.Metrics.TemperatureC == nil || item.Metrics.RainMmPerHour == nil || item.Metrics.UsAQIPM25 == nil {
+		t.Fatalf("seasonal item missing card metrics: %+v", item.Metrics)
+	}
 	start, _ := time.Parse("2006-01-02", item.StartDate)
 	end, _ := time.Parse("2006-01-02", item.EndDate)
 	if int(end.Sub(start).Hours()/24)+1 != 2 {
@@ -130,6 +133,9 @@ func TestForecastGroupsAndHourWeightedScore(t *testing.T) {
 	}
 	if item.Factors[0].AvailableHours != 48 || item.Factors[2].AvailableHours != 48 {
 		t.Fatalf("expected 48 selected hours: %+v", item.Factors)
+	}
+	if item.Metrics == nil || item.Metrics.TemperatureC == nil || item.Metrics.RainMmPerHour == nil || item.Metrics.UsAQIPM25 == nil {
+		t.Fatalf("forecast item missing card metrics: %+v", item.Metrics)
 	}
 }
 func TestForecastIncompleteAndRequirementFailure(t *testing.T) {

@@ -182,12 +182,18 @@ type Item struct {
 	StartDate    string           `json:"startDate"`
 	EndDate      string           `json:"endDate"`
 	Score        *float64         `json:"score"`
+	Metrics      *CardMetrics     `json:"metrics,omitempty"`
 	Coverage     Coverage         `json:"coverage"`
 	Factors      []Factor         `json:"factors"`
 	Requirements []Requirement    `json:"requirements"`
 	Reasons      []map[string]any `json:"reasons"`
 	SourceIDs    []string         `json:"sourceIds"`
 	Details      *Details         `json:"details,omitempty"`
+}
+type CardMetrics struct {
+	TemperatureC  *float64 `json:"temperatureC,omitempty"`
+	RainMmPerHour *float64 `json:"rainMmPerHour,omitempty"`
+	UsAQIPM25     *int     `json:"usAqiPm25,omitempty"`
 }
 type Group struct {
 	Mode   string `json:"mode"`
@@ -748,7 +754,29 @@ func (s *server) forecastItem(p Place, req RecommendationRequest, start, end tim
 	if len(missing) > 0 {
 		reasons = append(reasons, map[string]any{"code": "coverage_rule", "message": "แต่ละปัจจัยต้องมีข้อมูลอย่างน้อย 80% ของชั่วโมงที่เลือก"})
 	}
-	return Item{PlaceID: p.ID, Place: p, StartDate: dateOnly(start), EndDate: dateOnly(end), Score: score, Coverage: Coverage{weightedCoverage(factors, req.Preferences), daysBetween(start, end), daysBetween(start, end)}, Factors: factors, Requirements: reqs, Reasons: reasons, SourceIDs: sourcesFor(weather, airRows(s.forecastAir[p.ID]))}
+	metrics := cardMetricsFromForecast(factors, temps, rains, airs)
+	return Item{PlaceID: p.ID, Place: p, StartDate: dateOnly(start), EndDate: dateOnly(end), Score: score, Metrics: metrics, Coverage: Coverage{weightedCoverage(factors, req.Preferences), daysBetween(start, end), daysBetween(start, end)}, Factors: factors, Requirements: reqs, Reasons: reasons, SourceIDs: sourcesFor(weather, airRows(s.forecastAir[p.ID]))}
+}
+
+func cardMetricsFromForecast(factors []Factor, temps, rains, airs []float64) *CardMetrics {
+	if len(factors) < 3 {
+		return nil
+	}
+	m := &CardMetrics{}
+	if factors[0].Score != nil && len(temps) > 0 {
+		m.TemperatureC = ptr(average(temps))
+	}
+	if factors[1].Score != nil && len(rains) > 0 {
+		m.RainMmPerHour = ptr(average(rains))
+	}
+	if factors[2].Score != nil && len(airs) > 0 {
+		aqi := int(math.Round(average(airs)))
+		m.UsAQIPM25 = &aqi
+	}
+	if m.TemperatureC == nil && m.RainMmPerHour == nil && m.UsAQIPM25 == nil {
+		return nil
+	}
+	return m
 }
 func (s *server) seasonalItem(p Place, req RecommendationRequest, start, end string) Item {
 	trip := req.TripDays
@@ -804,18 +832,22 @@ func (s *server) seasonalItemForPeriod(p Place, req RecommendationRequest, start
 		}
 	}
 	temps, rains, airs := []float64{}, []float64{}, []float64{}
+	tempValues, rainValues, airValues := []float64{}, []float64{}, []float64{}
 	ty, ry, ay := 0, 0, 0
 	ids := []string{}
 	for _, r := range rows {
 		if r.TemperatureMeanC != nil && r.WeatherCoverage >= coverageMin {
+			tempValues = append(tempValues, *r.TemperatureMeanC)
 			temps = append(temps, scoreTemp(*r.TemperatureMeanC, req.Preferences.Temperature.MinC, req.Preferences.Temperature.MaxC))
 			ty++
 		}
 		if r.RainMeanMmPerHour != nil && r.WeatherCoverage >= coverageMin {
+			rainValues = append(rainValues, *r.RainMeanMmPerHour)
 			rains = append(rains, scoreRain(*r.RainMeanMmPerHour, req.Preferences.Rain.Preference))
 			ry++
 		}
 		if r.AirDailyAQIMean != nil && r.AirExpectedDays > 0 && float64(r.AirValidDays)/float64(r.AirExpectedDays) >= coverageMin {
+			airValues = append(airValues, *r.AirDailyAQIMean)
 			airs = append(airs, scoreDustAQI(*r.AirDailyAQIMean))
 			ay++
 		}
@@ -837,7 +869,29 @@ func (s *server) seasonalItemForPeriod(p Place, req RecommendationRequest, start
 			reasons = append(reasons, map[string]any{"code": "seasonal_requirement_unknown", "key": key, "message": "Seasonal แสดงแนวโน้มย้อนหลัง จึงไม่ยืนยันข้อจำเป็นรายวัน"})
 		}
 	}
-	return Item{PlaceID: p.ID, Place: p, StartDate: start, EndDate: end, Score: score, Coverage: Coverage{weightedCoverage(factors, req.Preferences), 0, 0}, Factors: factors, Requirements: requirements, Reasons: reasons, SourceIDs: ids}
+	metrics := cardMetricsFromSeasonal(factors, tempValues, rainValues, airValues)
+	return Item{PlaceID: p.ID, Place: p, StartDate: start, EndDate: end, Score: score, Metrics: metrics, Coverage: Coverage{weightedCoverage(factors, req.Preferences), 0, 0}, Factors: factors, Requirements: requirements, Reasons: reasons, SourceIDs: ids}
+}
+
+func cardMetricsFromSeasonal(factors []Factor, temps, rains, airs []float64) *CardMetrics {
+	if len(factors) < 3 {
+		return nil
+	}
+	m := &CardMetrics{}
+	if factors[0].Score != nil && len(temps) > 0 {
+		m.TemperatureC = ptr(average(temps))
+	}
+	if factors[1].Score != nil && len(rains) > 0 {
+		m.RainMmPerHour = ptr(average(rains))
+	}
+	if factors[2].Score != nil && len(airs) > 0 {
+		aqi := int(math.Round(average(airs)))
+		m.UsAQIPM25 = &aqi
+	}
+	if m.TemperatureC == nil && m.RainMmPerHour == nil && m.UsAQIPM25 == nil {
+		return nil
+	}
+	return m
 }
 
 func (s *server) requirementsFor(p Place, req RecommendationRequest, hours []time.Time, air map[string]dailyAirRecord, weather []observation) []Requirement {
