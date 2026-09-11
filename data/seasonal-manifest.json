@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "generatedAtUtc": "2026-09-10T17:59:01Z",
+  "timezone": "Asia/Bangkok",
+  "placeCount": 24,
+  "weatherYears": [
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "airYears": [
+    2023,
+    2024,
+    2025
+  ],
+  "months": 12,
+  "records": 2880,
+  "weatherCoverage": "ERA5 hourly full calendar years; per-record coverage retained",
+  "airCoverage": "CAMS archived forecast; daily AQI uses >=20/24 valid hours",
+  "sha256": "1878702e462b10541b9b2296c94c4ba2988cb99a1fe82c3d7f48151fbd93cd22",
+  "sourceUrls": [
+    "https://archive-api.open-meteo.com/v1/archive",
+    "https://air-quality-api.open-meteo.com/v1/air-quality"
+  ]
+}

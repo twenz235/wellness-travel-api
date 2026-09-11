@@ -1,0 +1,607 @@
+{
+  "version": 1,
+  "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+  "count": 24,
+  "places": [
+    {
+      "id": "park-01",
+      "name_th": "อุทยานแห่งชาติดอยอินทนนท์",
+      "source_name": "ดอยอินทนนท์",
+      "region_group": "north",
+      "province": "เชียงใหม่",
+      "type": "national_park",
+      "latitude": 18.5368,
+      "longitude": 98.5213,
+      "coordinate_source_values": {
+        "latitude": "18.5368",
+        "longitude": "98.5213"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=915",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-02",
+      "name_th": "อุทยานแห่งชาติห้วยน้ำดัง",
+      "source_name": "ห้วยน้ำดัง",
+      "region_group": "north",
+      "province": "เชียงใหม่",
+      "type": "national_park",
+      "latitude": 19.304,
+      "longitude": 98.5989,
+      "coordinate_source_values": {
+        "latitude": "19.304",
+        "longitude": "98.5989"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=922",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-03",
+      "name_th": "อุทยานแห่งชาติดอยภูคา",
+      "source_name": "ดอยภูคา",
+      "region_group": "north",
+      "province": "น่าน",
+      "type": "national_park",
+      "latitude": 19.2002,
+      "longitude": 101.0808,
+      "coordinate_source_values": {
+        "latitude": "19.2002",
+        "longitude": "101.0808"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=937",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-04",
+      "name_th": "อุทยานแห่งชาติแจ้ซ้อน",
+      "source_name": "แจ้ซ้อน",
+      "region_group": "north",
+      "province": "ลำปาง",
+      "type": "national_park",
+      "latitude": 18.8356,
+      "longitude": 99.4704,
+      "coordinate_source_values": {
+        "latitude": "18.8356",
+        "longitude": "99.4704"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=974",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-05",
+      "name_th": "อุทยานแห่งชาติแม่ปิง",
+      "source_name": "แม่ปิง",
+      "region_group": "north",
+      "province": "ลำพูน",
+      "type": "national_park",
+      "latitude": 17.6703,
+      "longitude": 98.8702,
+      "coordinate_source_values": {
+        "latitude": "17.6703",
+        "longitude": "98.8702"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=982",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-06",
+      "name_th": "อุทยานแห่งชาติน้ำหนาว",
+      "source_name": "น้ำหนาว",
+      "region_group": "north",
+      "province": "เพชรบูรณ์",
+      "type": "national_park",
+      "latitude": 16.7384,
+      "longitude": 101.57,
+      "coordinate_source_values": {
+        "latitude": "16.7384",
+        "longitude": "101.57"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=960",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-07",
+      "name_th": "อุทยานแห่งชาติเขาใหญ่",
+      "source_name": "เขาใหญ่",
+      "region_group": "northeast",
+      "province": "นครราชสีมา",
+      "type": "national_park",
+      "latitude": 14.439,
+      "longitude": 101.373,
+      "coordinate_source_values": {
+        "latitude": "14.439",
+        "longitude": "101.373"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=640",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-08",
+      "name_th": "อุทยานแห่งชาติภูกระดึง",
+      "source_name": "ภูกระดึง",
+      "region_group": "northeast",
+      "province": "เลย",
+      "type": "national_park",
+      "latitude": 16.871,
+      "longitude": 101.8472,
+      "coordinate_source_values": {
+        "latitude": "16.871",
+        "longitude": "101.8472"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=945",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-09",
+      "name_th": "อุทยานแห่งชาติภูเรือ",
+      "source_name": "ภูเรือ",
+      "region_group": "northeast",
+      "province": "เลย",
+      "type": "national_park",
+      "latitude": 17.4816,
+      "longitude": 101.3517,
+      "coordinate_source_values": {
+        "latitude": "17.4816",
+        "longitude": "101.3517"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=946",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-10",
+      "name_th": "อุทยานแห่งชาติผาแต้ม",
+      "source_name": "ผาแต้ม",
+      "region_group": "northeast",
+      "province": "อุบลราชธานี",
+      "type": "national_park",
+      "latitude": 15.4022,
+      "longitude": 105.4999,
+      "coordinate_source_values": {
+        "latitude": "15.4022",
+        "longitude": "105.4999"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=957",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-11",
+      "name_th": "อุทยานแห่งชาติภูจองนายอย",
+      "source_name": "ภูจองนายอย",
+      "region_group": "northeast",
+      "province": "อุบลราชธานี",
+      "type": "national_park",
+      "latitude": 14.4339,
+      "longitude": 105.2526,
+      "coordinate_source_values": {
+        "latitude": "14.4339",
+        "longitude": "105.2526"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=958",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-12",
+      "name_th": "อุทยานแห่งชาติภูผาเทิบ",
+      "source_name": "ภูผาเทิบ",
+      "region_group": "northeast",
+      "province": "มุกดาหาร",
+      "type": "national_park",
+      "latitude": 16.4352,
+      "longitude": 104.8055,
+      "coordinate_source_values": {
+        "latitude": "16.4352",
+        "longitude": "104.8055"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=911",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-13",
+      "name_th": "อุทยานแห่งชาติแก่งกระจาน",
+      "source_name": "แก่งกระจาน",
+      "region_group": "central_west_east",
+      "province": "เพชรบุรี",
+      "type": "national_park",
+      "latitude": 12.8848,
+      "longitude": 99.6329,
+      "coordinate_source_values": {
+        "latitude": "12.8848",
+        "longitude": "99.6329"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=642",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-14",
+      "name_th": "อุทยานแห่งชาติเอราวัณ",
+      "source_name": "เอราวัณ",
+      "region_group": "central_west_east",
+      "province": "กาญจนบุรี",
+      "type": "national_park",
+      "latitude": 14.3714,
+      "longitude": 99.1486,
+      "coordinate_source_values": {
+        "latitude": "14.3714",
+        "longitude": "99.1486"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=643",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-15",
+      "name_th": "อุทยานแห่งชาติทองผาภูมิ",
+      "source_name": "ทองผาภูมิ",
+      "region_group": "central_west_east",
+      "province": "กาญจนบุรี",
+      "type": "national_park",
+      "latitude": 14.6933,
+      "longitude": 98.4045,
+      "coordinate_source_values": {
+        "latitude": "14.6933",
+        "longitude": "98.4045"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=1008",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-16",
+      "name_th": "อุทยานแห่งชาติเขาแหลมหญ้า - หมู่เกาะเสม็ด",
+      "source_name": "เขาแหลมหญ้า - หมู่เกาะเสม็ด",
+      "region_group": "central_west_east",
+      "province": "ระยอง",
+      "type": "national_park",
+      "latitude": 12.5911,
+      "longitude": 101.4183,
+      "coordinate_source_values": {
+        "latitude": "12.5911",
+        "longitude": "101.4183"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=990",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-17",
+      "name_th": "อุทยานแห่งชาติเขาชะเมา - เขาวง",
+      "source_name": "เขาชะเมา - เขาวง",
+      "region_group": "central_west_east",
+      "province": "ระยอง",
+      "type": "national_park",
+      "latitude": 12.9129,
+      "longitude": 101.7245,
+      "coordinate_source_values": {
+        "latitude": "12.9129",
+        "longitude": "101.7245"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=988",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-18",
+      "name_th": "อุทยานแห่งชาติน้ำตกเจ็ดสาวน้อย",
+      "source_name": "น้ำตกเจ็ดสาวน้อย",
+      "region_group": "central_west_east",
+      "province": "สระบุรี",
+      "type": "national_park",
+      "latitude": 14.7255,
+      "longitude": 101.1889,
+      "coordinate_source_values": {
+        "latitude": "14.7255",
+        "longitude": "101.1889"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=891",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-19",
+      "name_th": "อุทยานแห่งชาติเขาสก",
+      "source_name": "เขาสก",
+      "region_group": "south",
+      "province": "สุราษฎร์ธานี",
+      "type": "national_park",
+      "latitude": 8.9156,
+      "longitude": 98.5284,
+      "coordinate_source_values": {
+        "latitude": "8.9156",
+        "longitude": "98.5284"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=1019",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-20",
+      "name_th": "อุทยานแห่งชาติคลองพนม",
+      "source_name": "คลองพนม",
+      "region_group": "south",
+      "province": "สุราษฎร์ธานี",
+      "type": "national_park",
+      "latitude": 8.8801,
+      "longitude": 98.6741,
+      "coordinate_source_values": {
+        "latitude": "8.8801",
+        "longitude": "98.6741"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=1022",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-21",
+      "name_th": "อุทยานแห่งชาติแหลมสน",
+      "source_name": "แหลมสน",
+      "region_group": "south",
+      "province": "ระนอง",
+      "type": "national_park",
+      "latitude": 9.6043,
+      "longitude": 98.4674,
+      "coordinate_source_values": {
+        "latitude": "9.6043",
+        "longitude": "98.4674"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=1005",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-22",
+      "name_th": "อุทยานแห่งชาติเขาหลัก - ลำรู่",
+      "source_name": "เขาหลัก - ลำรู่",
+      "region_group": "south",
+      "province": "พังงา",
+      "type": "national_park",
+      "latitude": 8.6267,
+      "longitude": 98.2392,
+      "coordinate_source_values": {
+        "latitude": "8.6267",
+        "longitude": "98.2392"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=992",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-23",
+      "name_th": "อุทยานแห่งชาติสิรินาถ",
+      "source_name": "สิรินาถ",
+      "region_group": "south",
+      "province": "ภูเก็ต",
+      "type": "national_park",
+      "latitude": 8.0956,
+      "longitude": 98.3003,
+      "coordinate_source_values": {
+        "latitude": "8.0956",
+        "longitude": "98.3003"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=889",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    },
+    {
+      "id": "park-24",
+      "name_th": "อุทยานแห่งชาติเขาปู่ - เขาย่า",
+      "source_name": "เขาปู่ - เขาย่า",
+      "region_group": "south",
+      "province": "พัทลุง",
+      "type": "national_park",
+      "latitude": 7.679,
+      "longitude": 99.8726,
+      "coordinate_source_values": {
+        "latitude": "7.679",
+        "longitude": "99.8726"
+      },
+      "coordinate_semantics": "park_contact_location_reference_point",
+      "coordinate_precision_note": "Source gives 3–4 decimal places; positional accuracy/datum not specified in dataset metadata. Not a verified campsite, summit, or whole-park centroid.",
+      "camping_available": null,
+      "operating_status": "not_checked",
+      "official_park_url": "https://portal.dnp.go.th/Content/nationalpark?contentId=998",
+      "sources": [
+        "https://catalog.dnp.go.th/dataset/e609e189-3bee-4076-b142-f147a5ff7f8e/resource/776d8cbc-e7f2-4b70-b941-466c073b6a22/download/nationalparksname.csv",
+        "https://catalog.dnp.go.th/dataset/6ed04038-08f9-48c0-b7cc-2d474d79f1a6/resource/26203bfe-28e9-4445-972f-cda9f529a2d5/download/address-catalog-122.csv"
+      ],
+      "verified_at_utc": "2026-09-09T11:46:39.643498+00:00",
+      "verification": "Exact name match after whitespace normalization, national-park type, matching province across two official DNP datasets, numeric coordinate/range checks. No field GPS verification."
+    }
+  ]
+}
