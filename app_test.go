@@ -1,4 +1,4 @@
-package main
+package wellnesstravel
 
 import (
 	"bytes"
@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"path/filepath"
 	"testing"
 	"time"
@@ -17,23 +18,23 @@ func testServer(t *testing.T) *server {
 	if err != nil {
 		t.Fatal(err)
 	}
-	places, err := loadPlaces(filepath.Join("..", "..", "data", "places.json"))
+	places, err := loadPlaces(filepath.Join("data", "places.json"))
 	if err != nil {
 		t.Fatal(err)
 	}
-	weather, ws, err := loadForecast(filepath.Join("..", "..", "data", "forecast.json"), places, false, loc)
+	weather, ws, err := loadForecast(filepath.Join("data", "forecast.json"), places, false, loc)
 	if err != nil {
 		t.Fatal(err)
 	}
-	air, as, err := loadForecast(filepath.Join("..", "..", "data", "air-forecast.json"), places, true, loc)
+	air, as, err := loadForecast(filepath.Join("data", "air-forecast.json"), places, true, loc)
 	if err != nil {
 		t.Fatal(err)
 	}
-	seasonal, err := loadSeasonal(filepath.Join("..", "..", "data", "seasonal_month.json"))
+	seasonal, err := loadSeasonal(filepath.Join("data", "seasonal_month.json"))
 	if err != nil {
 		t.Fatal(err)
 	}
-	seas5, err := loadSeas5(filepath.Join("..", "..", "data", "seas5.json"))
+	seas5, err := loadSeas5(filepath.Join("data", "seas5.json"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -350,6 +351,20 @@ func TestGinRouterAndCORS(t *testing.T) {
 	router.ServeHTTP(preflightResponse, preflight)
 	if preflightResponse.Code != http.StatusNoContent || preflightResponse.Header().Get("Access-Control-Allow-Origin") != "http://127.0.0.1:13001" {
 		t.Fatalf("gin preflight status=%d headers=%v", preflightResponse.Code, preflightResponse.Header())
+	}
+}
+
+func TestVercelHandlerHealthz(t *testing.T) {
+	t.Setenv("SUPABASE_URL", "")
+	t.Setenv("SUPABASE_SERVICE_ROLE_KEY", "")
+	req := httptest.NewRequest(http.MethodGet, "/healthz", nil)
+	resp := httptest.NewRecorder()
+	Handler(resp, req)
+	if resp.Code != http.StatusOK || !bytes.Contains(resp.Body.Bytes(), []byte(`"status":"ok"`)) {
+		t.Fatalf("vercel handler health status=%d body=%s", resp.Code, resp.Body.String())
+	}
+	if os.Getenv("SUPABASE_SERVICE_ROLE_KEY") != "" {
+		t.Fatal("test environment unexpectedly retained a Supabase service key")
 	}
 }
 
