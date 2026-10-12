@@ -1,0 +1,24 @@
+services:
+  api:
+    image: golang:1.26
+    working_dir: /app
+    volumes:
+      - .:/app
+      - go-mod:/go/pkg/mod
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - CORS_ORIGIN=https://3000-${BASE44_PUBLIC_HOST_SUFFIX},http://localhost:3000,http://127.0.0.1:3000
+      - BASE44_PREVIEW_MODE=1
+    command: ["sh", "-ec", "go mod download && exec go run ."]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: on-failure
+
+volumes:
+  go-mod:
